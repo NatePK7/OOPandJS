@@ -9,41 +9,37 @@
   <title>Tricky JS</title>
 </head>
 <body>
-  <div class="container">
-    <div class="row">
-      <div class="col s12">
-        <div id="main" class="card">
-          <div class="card-content">
-            <span class="card-title">Tricky JS</span>
-            <div class="row">
-              <form id="task-form">
-                <div class="input-field col s12">
-                  <input type="text" name="task" id="task">
-                  <label for="task">New Task</label>
-                </div>
-                <input type="submit" value="Add Task" class="btn">
-              </form>
-            </div>
-          </div>
-          <div class="card-action">
-            <h5 id="task-title">Tasks</h5>
-            <div class="input-field col s12">
-              <input type="text" name="filter" id="filter">
-              <label for="filter">Filter Tasks</label>
-            </div>
-            <ul class="collection"></ul>
-            <a href="#" class="clear-tasks btn black">Clear Tasks</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <script
-  src="https://code.jquery.com/jquery-3.2.1.js"
-  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
-  crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
+<div class="container">
+  <div class="jumbotron">
+  <h1 class="display-4">Java Script Key word "this"</h1>
+    <p class="lead">Rule 1 Global:  Keyword this in the wild (outside of the declared object. Object has not been defined which contains the keyword this) Value refers to the global object which is the window object (browser) </p>
+  <hr class="my-4">
+    <p>Rule 2 object/ implicit: Keyword this inside of a declared object value is the closest parent object</p>
+  <hr class="my-4">
+    <p>Rule 3 explicit using call, apply and bind only applies to functions:  to explicitly set the value of Keyword this , we use call apply or bind.  with the bind keyword, the first argument called is this</p>
+  <hr class="my-4">
+    <p> Rule 4 New:  Keyword this  with the new keyword, the this applies to the new empty object.</p>
+  <a class="btn btn-primary btn-lg" href="https://www.udemy.com/course/the-web-developer-bootcamp/learn/lecture/5697562#questions" role="button">Learn more at Web Developer Bootcamp</a>
+</div>
+</div>
+
+<div class="container">
+  <div class="jumbotron">
+  <h1 class="display-4">Java Script Key word "new"</h1>
+    <p class="lead">First it creates an empty object out of thin air.</p>
+  <hr class="my-4">
+    <p>Second it then sets the value of the keyword..</p>
+  <hr class="my-4">
+    <p>Third it adds an implicit return.</p>
+  <hr class="my-4">
+    <p> Fourth it adds the Dunder Prato property onto the object that was just created.</p>
+  <a class="btn btn-primary btn-lg" href="https://www.udemy.com/course/the-web-developer-bootcamp/learn/lecture/5697562#questions" role="button">Learn more at Web Developer Bootcamp</a>
+</div>
+</div>
+ 
+
   <script src="app.js"></script>
 </body>
 </html>

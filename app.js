@@ -1,260 +1,105 @@
 // Define UI Vars
-const form = document.querySelector('#task-form');
-const taskList = document.querySelector('.collection');
-const clearBtn = document.querySelector('.clear-tasks');
-const filter = document.querySelector('#filter');
-const taskInput = document.querySelector('#task');
+const form = document.querySelector("#task-form");
+const taskList = document.querySelector(".collection");
+const clearBtn = document.querySelector(".clear-tasks");
+const filter = document.querySelector("#filter");
+const taskInput = document.querySelector("#task");
 
-// Load all event listeners
-loadEventListeners();
+/* 
+Start of Tricky Java Script
+1. Rule 1 Global:  Keyword this in the wild (outside of the declared object. Object has not been defined which contains the keyword this) Value refers to the global object which is the window object (browser)
+2. Rule 2 object/ implicit: Keyword this inside of a declared object value is the closest parent object
+3. Rule 3 explicit using call, apply and bind only applies to functions:  to explicitly set the value of Keyword this , we use call apply or bind.  with the bind keyword, the first argument called is this
+Rule 4 New:  Keyword this  with the new keyword, the this applies to the new empty object.
+console.log(this) */
 
-// Load all event listeners
-function loadEventListeners() {
-  // DOM Load event
-  document.addEventListener('DOMContentLoaded', getTasks);
-  // Add task event
-  form.addEventListener('submit', addTask);
-  // Remove task event
-  taskList.addEventListener('click', removeTask);
-  // Clear task event
-  clearBtn.addEventListener('click', clearTasks);
-  // Filter tasks event
-  filter.addEventListener('keyup', filterTasks);
+function whatIsThis() {
+  return this;
 }
 
-// Get Tasks from LS
-function getTasks() {
-  let tasks;
-  if(localStorage.getItem('tasks') === null){
-    tasks = [];
-  } else {
-    tasks = JSON.parse(localStorage.getItem('tasks'));
-  }
-
-  tasks.forEach(function(task){
-    // Create li element
-    const li = document.createElement('li');
-    // Add class
-    li.className = 'collection-item';
-    // Create text node and append to li
-    li.appendChild(document.createTextNode(task));
-    // Create new link element
-    const link = document.createElement('a');
-    // Add class
-    link.className = 'delete-item secondary-content';
-    // Add icon html
-    link.innerHTML = '<i class="fa fa-remove"></i>';
-    // Append the link to li
-    li.appendChild(link);
-
-    // Append li to ul
-    taskList.appendChild(li);
-  });
+function variablesInThis() {
+  this.person = "billy";
 }
 
-// Add Task
-function addTask(e) {
-  if(taskInput.value === '') {
-    alert('Add a task');
-  }
+variablesInThis();
+whatIsThis();
 
-  // Create li element
-  const li = document.createElement('li');
-  // Add class
-  li.className = 'collection-item';
-  // Create text node and append to li
-  li.appendChild(document.createTextNode(taskInput.value));
-  // Create new link element
-  const link = document.createElement('a');
-  // Add class
-  link.className = 'delete-item secondary-content';
-  // Add icon html
-  link.innerHTML = '<i class="fa fa-remove"></i>';
-  // Append the link to li
-  li.appendChild(link);
+console.log(this);
 
-  // Append li to ul
-  taskList.appendChild(li);
-
-  // Store in LS
-  storeTaskInLocalStorage(taskInput.value);
-
-  // Clear input
-  taskInput.value = '';
-
-  e.preventDefault();
+function whatIsThis() {
+  return this;
 }
 
-// Store Task
-function storeTaskInLocalStorage(task) {
-  let tasks;
-  if(localStorage.getItem('tasks') === null){
-    tasks = [];
-  } else {
-    tasks = JSON.parse(localStorage.getItem('tasks'));
-  }
-
-  tasks.push(task);
-
-  localStorage.setItem('tasks', JSON.stringify(tasks));
+function variablesInThis() {
+  this.person = "billy";
 }
 
-// Remove Task
-function removeTask(e) {
-  if(e.target.parentElement.classList.contains('delete-item')) {
-    if(confirm('Are You Sure?')) {
-      e.target.parentElement.parentElement.remove();
+variablesInThis();
+whatIsThis();
 
-      // Remove from LS
-      removeTaskFromLocalStorage(e.target.parentElement.parentElement);
-    }
-  }
-}
-
-// Remove from LS
-function removeTaskFromLocalStorage(taskItem) {
-  let tasks;
-  if(localStorage.getItem('tasks') === null){
-    tasks = [];
-  } else {
-    tasks = JSON.parse(localStorage.getItem('tasks'));
-  }
-
-  tasks.forEach(function(task, index){
-    if(taskItem.textContent === task){
-      tasks.splice(index, 1);
-    }
-  });
-
-  localStorage.setItem('tasks', JSON.stringify(tasks));
-}
-
-// Clear Tasks
-function clearTasks() {
-  // taskList.innerHTML = '';
-
-  // Faster
-  while(taskList.firstChild) {
-    taskList.removeChild(taskList.firstChild);
-  }
-
-  // https://jsperf.com/innerhtml-vs-removechild
-
-  // Clear from LS
-  clearTasksFromLocalStorage();
-}
-
-// Clear Tasks from LS
-function clearTasksFromLocalStorage() {
-  localStorage.clear();
-}
-
-// Filter Tasks
-function filterTasks(e) {
-  const text = e.target.value.toLowerCase();
-
-  document.querySelectorAll('.collection-item').forEach(function(task){
-    const item = task.firstChild.textContent;
-    if(item.toLowerCase().indexOf(text) != -1){
-      task.style.display = 'block';
-    } else {
-      task.style.display = 'none';
-    }
-  });
-}
-
-
-console.log(this)
-
-function whatIsThis(){
-  return this
-}
-
-function variablesInThis(){
-  this.person = "billy"
-}
-
-variablesInThis()
-whatIsThis()
-
-
-
-console.log(this)
-
-function whatIsThis(){
-  return this
-}
-
-function variablesInThis(){
-  var this.person = "billy"
-}
-
-variablesInThis()
-whatIsThis()
-
-var data = {};  // created a new global object
-data.instructor = "hobie" // added a property instructor to the data object
-
+var data = {}; // created a new global object
+data.instructor = "hobie"; // added a property instructor to the data object
 
 var girl = {
-  firstName: 'Kimmy D',
+  firstName: "Kimmy D",
   sayHi: function() {
-    return "Hi " + this.firstName
-  },
-  determineContext: function(){
-    return this === girl
-  },
-
-cat: {
-  sayHello: function() {
-    return "Hello " + this.firstName;
+    return "Hi " + this.firstName;
   },
   determineContext: function() {
-    return this === person;
-  }
-}
-}
+    return this === girl;
+  },
 
+  cat: {
+    sayHello: function() {
+      return "Hello " + this.firstName;
+    },
+    determineContext: function() {
+      return this === person;
+    }
+  }
+};
 
 var cat = {
   firstName: "Hobie",
   sayHi: function() {
-    return "Meow " + this.firstName
+    return "Meow " + this.firstName;
   }
-}
+};
 var kim = {
   firstName: "Kimmy"
-}
-cat.sayHi()
-cat.sayHi.call(kim)
-
+};
+cat.sayHi();
+cat.sayHi.call(kim);
 
 function Dog(name, age) {
   this.name = name;
   this.age = age;
   this.bark = function() {
     console.log(this.name + " just barked!");
-  }
+  };
 }
 
-var rusty = new Dog('Rusty', 3);
-var fido = new Dog('Fido', 1);
+var rusty = new Dog("Rusty", 3);
+var fido = new Dog("Fido", 1);
 
-rusty.bark()
-fido.bark()
+rusty.bark();
+fido.bark();
 
+// OOP
 
-function House(bedrooms, bathrooms, numSqft){
+// set up constructor function
+function House(bedrooms, bathrooms, numSqft) {
+  // constructor function is capitalized which is convention
   this.bedrooms = bedrooms;
   this.bathrooms = bathrooms;
   this.numSqft = numSqft;
 }
 
-var firstHouse = new House(2,2,1000)
-firstHouse.bedrooms
+var firstHouse = new House(2, 2, 1000); // because of the new keyword the this.value above which should be global is instead tied to the new empty object
 
+firstHouse.bedrooms;
 
-function Car(make, model, year){
+function Car(make, model, year) {
   this.make = make;
   this.model = model;
   this.year = year;
@@ -262,13 +107,28 @@ function Car(make, model, year){
 }
 
 function flyRod(make, model, year) {
-  Car.apply(this, arguments)
+  Car.apply(this, arguments);
   this.numWheels = 0;
 }
 
-var tesla = new Car('Tesla', 'Model 3', '2018' )
+/* new keyword
+Now before we recap with a new keyword does pause the video and see if you remember any of those four
+things.
 
-var spey = new flyRod("G Loomis", "Asquith", "2020")
+First it creates an empty object out of thin air.
 
-tesla.make()
-spey.make()
+Second it then sets the value of the keyword.
+This in the function which is being used with to be the empty object that was just created.
+
+Third it adds an implicit return.
+This at the end of the function so that the object created using the new keyword can be returned from
+the function.
+
+Fourth it adds the Dunder Prato property onto the object that was just created. */
+
+var tesla = new Car("Tesla", "Model 3", "2018");
+
+var spey = new flyRod("G Loomis", "Asquith", "2020");
+
+// tesla.make();
+// spey.make();
