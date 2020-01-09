@@ -71,16 +71,21 @@ var kim = {
 cat.sayHi();
 cat.sayHi.call(kim);
 
-function Dog(name, age) {
+/* create a constructor function for a Dog - each dog should have a name 
+and an age. Add a function for each dog called 'bark,' which console.log
+the name of the dog added to the string 'just barked!' */
+
+function Dog(name, age, color) {
   this.name = name;
   this.age = age;
+  this.color = color;
   this.bark = function() {
-    console.log(this.name + " just barked!");
+    console.log(this.name + " the " + this.color + " dog" + " just barked!");
   };
 }
 
-var rusty = new Dog("Rusty", 3);
-var fido = new Dog("Fido", 1);
+var rusty = new Dog("Rusty", 3, "red");
+var fido = new Dog("Fido", 1, "white");
 
 rusty.bark();
 fido.bark();
