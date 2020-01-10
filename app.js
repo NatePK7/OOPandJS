@@ -100,21 +100,10 @@ function House(bedrooms, bathrooms, numSqft) {
   this.numSqft = numSqft;
 }
 
-var firstHouse = new House(2, 2, 1000); // because of the new keyword the this.value above which should be global is instead tied to the new empty object
+var firstHouse = new House(4, 3, 2900);
+firstHouse.bedrooms // returns 4 
 
-firstHouse.bedrooms;
-
-function Car(make, model, year) {
-  this.make = make;
-  this.model = model;
-  this.year = year;
-  this.numWheels = 4;
-}
-
-function flyRod(make, model, year) {
-  Car.apply(this, arguments);
-  this.numWheels = 0;
-}
+// because of the new keyword the this.value above which should be global is instead tied to the new empty object
 
 /* new keyword
 Now before we recap with a new keyword does pause the video and see if you remember any of those four
@@ -131,9 +120,60 @@ the function.
 
 Fourth it adds the Dunder Prato property onto the object that was just created. */
 
-var tesla = new Car("Tesla", "Model 3", "2018");
+// Using Call
+function Car(make, model, year) {
+  this.make = make;
+  this.model = model;
+  this.year = year;
+  this.numWheels = 4;
+}
 
+function flyRod(make, model, year) {
+  Car.call(this, make,model,year); // call uses comma separated 
+  this.numWheels = 0;
+}
+
+var tesla = new Car("Tesla", "Model 3", "2018");
 var spey = new flyRod("G Loomis", "Asquith", "2020");
 
-// tesla.make();
-// spey.make();
+tesla.make
+spey.make
+
+
+// Using Apply
+function Car(make, model, year) {
+  this.make = make;
+  this.model = model;
+  this.year = year;
+  this.numWheels = 4;
+}
+
+function flyRod(make, model, year) {
+  Car.apply(this, [make,model,year]); // apply uses arrays
+  this.numWheels = 0;
+}
+
+var tesla = new Car("Tesla", "Model 3", "2018");
+var spey = new flyRod("G Loomis", "Asquith", "2020");
+
+tesla.make
+spey.make
+
+// Using Apply with arguments
+function Car(make, model, year) {
+  this.make = make;
+  this.model = model;
+  this.year = year;
+  this.numWheels = 4;
+}
+
+function flyRod(make, model, year) {
+  Car.apply(this, arguments);  // refactor with arguments instead of using make, model and year
+  this.numWheels = 0;
+}
+
+var tesla = new Car("Tesla", "Model 3", "2018");
+var spey = new flyRod("G Loomis", "Asquith", "2020");
+
+tesla.make
+spey.make
