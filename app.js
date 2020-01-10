@@ -1,10 +1,3 @@
-// Define UI Vars
-const form = document.querySelector("#task-form");
-const taskList = document.querySelector(".collection");
-const clearBtn = document.querySelector(".clear-tasks");
-const filter = document.querySelector("#filter");
-const taskInput = document.querySelector("#task");
-
 /* 
 Start of Tricky Java Script
 1. Rule 1 Global:  Keyword this in the wild (outside of the declared object. Object has not been defined which contains the keyword this) Value refers to the global object which is the window object (browser)
@@ -40,6 +33,8 @@ whatIsThis();
 var data = {}; // created a new global object
 data.instructor = "hobie"; // added a property instructor to the data object
 
+
+// inside of a declared object
 var girl = {
   firstName: "Kimmy D",
   sayHi: function() {
@@ -101,7 +96,7 @@ function House(bedrooms, bathrooms, numSqft) {
 }
 
 var firstHouse = new House(4, 3, 2900);
-firstHouse.bedrooms // returns 4 
+firstHouse.bedrooms; // returns 4
 
 // because of the new keyword the this.value above which should be global is instead tied to the new empty object
 
@@ -129,16 +124,15 @@ function Car(make, model, year) {
 }
 
 function flyRod(make, model, year) {
-  Car.call(this, make,model,year); // call uses comma separated 
+  Car.call(this, make, model, year); // call uses comma separated
   this.numWheels = 0;
 }
 
 var tesla = new Car("Tesla", "Model 3", "2018");
 var spey = new flyRod("G Loomis", "Asquith", "2020");
 
-tesla.make
-spey.make
-
+tesla.make;
+spey.make;
 
 // Using Apply
 function Car(make, model, year) {
@@ -149,15 +143,15 @@ function Car(make, model, year) {
 }
 
 function flyRod(make, model, year) {
-  Car.apply(this, [make,model,year]); // apply uses arrays
+  Car.apply(this, [make, model, year]); // apply uses arrays
   this.numWheels = 0;
 }
 
 var tesla = new Car("Tesla", "Model 3", "2018");
 var spey = new flyRod("G Loomis", "Asquith", "2020");
 
-tesla.make
-spey.make
+tesla.make;
+spey.make;
 
 // Using Apply with arguments
 function Car(make, model, year) {
@@ -168,12 +162,12 @@ function Car(make, model, year) {
 }
 
 function flyRod(make, model, year) {
-  Car.apply(this, arguments);  // refactor with arguments instead of using make, model and year
+  Car.apply(this, arguments); // refactor with arguments instead of using make, model and year
   this.numWheels = 0;
 }
 
 var tesla = new Car("Tesla", "Model 3", "2018");
 var spey = new flyRod("G Loomis", "Asquith", "2020");
 
-tesla.make
-spey.make
+tesla.make;
+spey.make;
