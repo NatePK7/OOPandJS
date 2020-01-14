@@ -10,34 +10,43 @@ function whatIsThis() {
   return this;
 }
 
-function variablesInThis() {
-  this.person = "billy";
-}
+// When this is not inside of a declared object
 
-variablesInThis();
-whatIsThis();
 
-console.log(this);
+console.log(this); // window. Keyword this in the wild (outside of the declared object. Object has not been defined which contains the keyword this)
 
 function whatIsThis() {
-  return this;
+  return this;   
 }
 
+whatIsThis(); // window The function whatIsThis is also global because the keyword this is not inside of an declared object
+
+// Create a global variable or object
+var person = 'kelli'
+
+window.person === person //true
+
+// Inadvertently creating global variables within a function or object
 function variablesInThis() {
-  this.person = "billy";
+  // since the value of this is the window
+  // all we are doing here is creating a global variable
+  this.person = "kelli"  //* / attaching a property called person and setting it equal to kelli. since the key word this refers to the global object anything we attach onto it becomes a global variable which means we can use it outside of its function. Bad practice to create global variables within objects.  "use strict" to follow JS best practices. */ 
 }
 
-variablesInThis();
-whatIsThis();
+console.log(person); // kelli
 
+
+
+//  teacher property inside of a declared object
 var data = {}; // created a new global object
-data.instructor = "hobie"; // added a property instructor to the data object
+data.teacher = "kelli"; // added a property teacher to the data object
 
+data.teacher;  // kelli (teacher is inside of a declared object)
 
 // inside of a declared object
 var girl = {
   firstName: "Kimmy D",
-  sayHi: function() {
+  sayHello: function() {
     return "Hi " + this.firstName;
   },
   determineContext: function() {
@@ -54,17 +63,89 @@ var girl = {
   }
 };
 
-var cat = {
-  firstName: "Hobie",
+cat.sayHello; // returns undefined
+
+// Fix with CAll
+var girl = {
+  firstName: "Kimmy D",
   sayHi: function() {
-    return "Meow " + this.firstName;
+    return "Hi " + this.firstName;
+  },
+  determineContext: function() {
+    return this === girl;
+  },
+
+  cat: {
+    sayHello: function() {
+      return "Meow " + this.firstName;
+    },
+    determineContext: function() {
+      return this === girl;
+    }
   }
 };
-var kim = {
-  firstName: "Kimmy"
+
+girl.sayHi();
+girl.determineContext();
+
+girl.cat.sayHello.call(girl); // Hello Kimmy D
+girl.cat.determineContext.call(girl); // true
+
+// Using Call in the Wild common use case
+
+var meow = {
+  firstName: "Hobie",
+  sayHi: function() {
+    return "Meowy Meow " + this.firstName;
+  }
 };
-cat.sayHi();
-cat.sayHi.call(kim);
+
+var smelly = {
+  firstName: "Sophie",
+  sayHi: function() {
+    return "Meowy Meow " + this.firstName;
+  }
+};
+
+meow.sayHi(); // Meowy Meow Hobie
+smelly.sayHi(); // Meowy Meow Sophie
+
+//refactor to remove duplication
+
+var meow = {
+  firstName: "Hobie",
+  sayHi: function() {
+    return "Meowy Meow " + this.firstName;
+  }
+};
+
+var smelly = {
+  firstName: "Sophie"
+};
+
+meow.sayHi(); // meowy mow hobie
+meow.sayHi.call(smelly); //meowy meow sophie
+
+// Bind
+var sam = {
+  firstName: "Sam",
+  sayHi: function() {
+    return "Hi " + this.firstName;
+  },
+  addNumbers: function(a, b, c, d) {
+    return this.firstName + " just calculated " + (a + b + c + d);
+  }
+};
+
+var brian = {
+  firstName: "Brian"
+};
+
+var brianCalc = sam.addNumbers.bind(brian, 1, 2, 3, 4);
+brianCalc(); // Brian just calculated 10
+
+var brianCalc2 = sam.addNumbers.bind(brian, 1, 2);
+brianCalc2(3, 4); // Brian just calculated 10
 
 /* create a constructor function for a Dog - each dog should have a name 
 and an age. Add a function for each dog called 'bark,' which console.log
