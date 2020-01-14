@@ -10,6 +10,8 @@ function whatIsThis() {
   return this;
 }
 
+
+
 // When this is not inside of a declared object
 
 
@@ -26,22 +28,39 @@ var person = 'kelli'
 
 window.person === person //true
 
-// Inadvertently creating global variables within a function or object
-function variablesInThis() {
-  // since the value of this is the window
-  // all we are doing here is creating a global variable
-  this.person = "kelli"  //* / attaching a property called person and setting it equal to kelli. since the key word this refers to the global object anything we attach onto it becomes a global variable which means we can use it outside of its function. Bad practice to create global variables within objects.  "use strict" to follow JS best practices. */ 
-}
-
-console.log(person); // kelli
-
-
-
 //  teacher property inside of a declared object
 var data = {}; // created a new global object
 data.teacher = "kelli"; // added a property teacher to the data object
 
 data.teacher;  // kelli (teacher is inside of a declared object)
+
+
+// Inadvertently creating global variables within a function or object
+function variablesInThis() {
+  // since the value of this is the window
+  // all we are doing here is creating a global variable
+  this.person = "kelli"  //* / attaching a property called person and setting it equal to kelli. since the key word this refers to the global object anything we attach onto it becomes a global variable which means we can use it outside of its function. Bad practice to create global variables within objects.  "use strict" to follow JS best practices. List global variables at the top of our code even if we don't know the values yet and assign those values at a later time */ 
+}
+
+console.log(person); // kelli
+
+// Using strict mode uses java script best practices 
+"use strict"
+console.log(this) // window
+
+function variablesInThis(){
+  //since we are in strict mode this is undefinied
+  this.person = "kelli" 
+}
+
+variablesInThis() //type error
+
+function whatIsThis(){
+  return this
+}
+
+whatIsThis() // undefined
+
 
 // inside of a declared object
 var girl = {
