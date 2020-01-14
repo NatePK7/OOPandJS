@@ -55,7 +55,6 @@ function whatIsThis() {
 
 whatIsThis(); // undefined
 
-
 /* Rule 2 Implicit / Object: Keyword this inside of a declared object value is the closest parent object
 inside of a declared object
 Nested Objects */
@@ -71,7 +70,7 @@ var girl = {
 
   cat: {
     sayHello: function() {
-      return "Hello " + this.firstName;  //keyword this refers to the cat object
+      return "Hello " + this.firstName; //keyword this refers to the cat object
     },
     determineContext: function() {
       return this === person;
@@ -79,15 +78,14 @@ var girl = {
   }
 };
 
-girl.determineContext()  // true
-girl.sayHi() // Hi Kimmy D
-girl.cat.determineContext() // false
-girl.cat.sayHello() // hello undefined because the cat object does not have a key of first name 
-cat.sayHello; // returns undefined uncaught reference error because the cat object does not have a key of firstName
+girl.determineContext(); // true
+girl.sayHi(); // Hi Kimmy D
+girl.cat.determineContext(); // false
+girl.cat.sayHello(); // hello undefined because the cat object does not have a key of first name
 
-/* if we wanted to call hello Kimmy D we would need a way to explicitly change the value of the keyword this and that's where call, apply and bind come in */
+/* if we wanted to call  the sayHello method to return Hello Kimmy D instead of Hello Undefined?  We would need a way to explicitly change the value of the keyword this and that's where call, apply and bind come in */
 
-// Fix with CAll
+// Fix with Call
 var girl = {
   firstName: "Kimmy D",
   sayHi: function() {
