@@ -1,17 +1,16 @@
-/* 
-Start of Tricky Java Script
-1. Rule 1 Global:  Keyword this in the wild (outside of the declared object. Object has not been defined which contains the keyword this) Value refers to the global object which is the window object (browser)
-2. Rule 2 object/ implicit: Keyword this inside of a declared object value is the closest parent object
-3. Rule 3 explicit using call, apply and bind only applies to functions:  to explicitly set the value of Keyword this , we use call apply or bind.  with the bind keyword, the first argument called is this
-Rule 4 New:  Keyword this  with the new keyword, the this applies to the new empty object.
-console.log(this) */
 
-function whatIsThis() {
-  return this;
-}
+/* Start of Tricky Java Script
+ 
+	Rule 1 Global:  if the keyword this is outside of a declared object, its value is the global or window object
 
+	Rule 2 object/ implicit: Keyword this inside of a declared object value is the closest parent object
+
+  Rule 3 explicit using call, apply and bind only applies to functions:  to explicitly set the value of Keyword this , we use call apply or bind.  
+  
+  Rule 4 New:  Keyword this  with the new keyword, the this applies to the new empty object. */
 
 
+ 
 // When this is not inside of a declared object
 
 
