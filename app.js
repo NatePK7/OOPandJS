@@ -1,4 +1,3 @@
-
 /* Start of Tricky Java Script
  
 	Rule 1 Global:  if the keyword this is outside of a declared object, its value is the global or window object
@@ -9,62 +8,61 @@
   
   Rule 4 New:  Keyword this  with the new keyword, the this applies to the new empty object. */
 
-
- 
 // When this is not inside of a declared object
-
 
 console.log(this); // window. Keyword this in the wild (outside of the declared object. Object has not been defined which contains the keyword this)
 
 function whatIsThis() {
-  return this;   
+  return this;
 }
 
 whatIsThis(); // window The function whatIsThis is also global because the keyword this is not inside of an declared object
 
 // Create a global variable or object
-var person = 'kelli'
+var person = "kelli";
 
-window.person === person //true
+window.person === person; //true
 
 //  teacher property inside of a declared object
 var data = {}; // created a new global object
 data.teacher = "kelli"; // added a property teacher to the data object
 
-data.teacher;  // kelli (teacher is inside of a declared object)
-
+data.teacher; // kelli (teacher is inside of a declared object)
 
 // Inadvertently creating global variables within a function or object
 function variablesInThis() {
   // since the value of this is the window
   // all we are doing here is creating a global variable
-  this.person = "kelli"  //* / attaching a property called person and setting it equal to kelli. since the key word this refers to the global object anything we attach onto it becomes a global variable which means we can use it outside of its function. Bad practice to create global variables within objects.  "use strict" to follow JS best practices. List global variables at the top of our code even if we don't know the values yet and assign those values at a later time */ 
+  this.person = "kelli"; //* / attaching a property called person and setting it equal to kelli. since the key word this refers to the global object anything we attach onto it becomes a global variable which means we can use it outside of its function. Bad practice to create global variables within objects.  "use strict" to follow JS best practices. List global variables at the top of our code even if we don't know the values yet and assign those values at a later time */
 }
 
 console.log(person); // kelli
 
-// Using strict mode uses java script best practices 
-"use strict"
-console.log(this) // window
+// Using strict mode uses java script best practices
+("use strict");
+console.log(this); // window
 
-function variablesInThis(){
+function variablesInThis() {
   //since we are in strict mode this is undefinied
-  this.person = "kelli" 
+  this.person = "kelli";
 }
 
-variablesInThis() //type error
+variablesInThis(); //type error
 
-function whatIsThis(){
-  return this
+function whatIsThis() {
+  return this;
 }
 
-whatIsThis() // undefined
+whatIsThis(); // undefined
 
 
-// inside of a declared object
+/* Rule 2 Implicit / Object: Keyword this inside of a declared object value is the closest parent object
+inside of a declared object
+Nested Objects */
+
 var girl = {
   firstName: "Kimmy D",
-  sayHello: function() {
+  sayHi: function() {
     return "Hi " + this.firstName;
   },
   determineContext: function() {
@@ -73,7 +71,7 @@ var girl = {
 
   cat: {
     sayHello: function() {
-      return "Hello " + this.firstName;
+      return "Hello " + this.firstName;  //keyword this refers to the cat object
     },
     determineContext: function() {
       return this === person;
@@ -81,7 +79,13 @@ var girl = {
   }
 };
 
-cat.sayHello; // returns undefined
+girl.determineContext()  // true
+girl.sayHi() // Hi Kimmy D
+girl.cat.determineContext() // false
+girl.cat.sayHello() // hello undefined because the cat object does not have a key of first name 
+cat.sayHello; // returns undefined uncaught reference error because the cat object does not have a key of firstName
+
+/* if we wanted to call hello Kimmy D we would need a way to explicitly change the value of the keyword this and that's where call, apply and bind come in */
 
 // Fix with CAll
 var girl = {
@@ -95,7 +99,7 @@ var girl = {
 
   cat: {
     sayHello: function() {
-      return "Meow " + this.firstName;
+      return "Hello " + this.firstName;
     },
     determineContext: function() {
       return this === girl;
@@ -103,8 +107,8 @@ var girl = {
   }
 };
 
-girl.sayHi();
-girl.determineContext();
+girl.sayHi(); // Hi Kimmy D
+girl.determineContext(); // true
 
 girl.cat.sayHello.call(girl); // Hello Kimmy D
 girl.cat.determineContext.call(girl); // true
