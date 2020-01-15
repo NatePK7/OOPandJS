@@ -85,7 +85,7 @@ girl.cat.sayHello(); // hello undefined because the cat object does not have a k
 
 /* if we wanted to call  the sayHello method to return Hello Kimmy D instead of Hello Undefined?  We would need a way to explicitly change the value of the keyword this and that's where call, apply and bind come in */
 
-// Fix with Call
+// Fix Up with Call
 var girl = {
   firstName: "Kimmy D",
   sayHi: function() {
@@ -110,6 +110,10 @@ girl.determineContext(); // true
 
 girl.cat.sayHello.call(girl); // Hello Kimmy D
 girl.cat.determineContext.call(girl); // true
+
+/* we are not invoking sayHello or determineContext methods but instead 
+attaching call onto them so there are no parentheses after sayHello or determineContext methods */
+
 
 // Using Call in the Wild common use case
 
@@ -144,9 +148,14 @@ var smelly = {
 };
 
 meow.sayHi(); // meowy mow hobie
-meow.sayHi.call(smelly); //meowy meow sophie
+meow.sayHi.call(smelly); //meowy meow sophie  using the meow object's function and calling smelly object. Explicitly set to the smelly object
 
-// Bind
+
+/* Bind is partial application 
+Works just like call but Bind returns a function definition set to the value of this.arg
+Don't need to know all the parameters of the function when bind we only need to know what the value of the key word
+this to be  */
+
 var sam = {
   firstName: "Sam",
   sayHi: function() {
@@ -167,6 +176,18 @@ brianCalc(); // Brian just calculated 10
 var brianCalc2 = sam.addNumbers.bind(brian, 1, 2);
 brianCalc2(3, 4); // Brian just calculated 10
 
+
+/* Rule 4 New:  Keyword this  with the new keyword, the this applies to the new empty object. */
+
+/* OOP (Object Oriented Programming)
+Programming model based around the idea of objects
+and blue prints which create objects. Blue prints are called classes
+the objects that are created from these classes are called instances 
+Java Script does not have built in classes- we can mimic the behavior of classes by using JavaScript functions and objects*/
+
+
+
+
 /* create a constructor function for a Dog - each dog should have a name 
 and an age. Add a function for each dog called 'bark,' which console.log
 the name of the dog added to the string 'just barked!' */
@@ -186,7 +207,20 @@ var fido = new Dog("Fido", 1, "white");
 rusty.bark();
 fido.bark();
 
-// OOP
+
+/* Imagine for a second that you're an architect and you're tasked with building 4 houses.
+
+Each house is going to have a number of bedrooms bathrooms as well as a number of square feet.
+
+The first thing that might come to mind is let's make an object for each house We need to make.
+
+Seems pretty reasonable but once we start having to create more than a few objects things get very repetitive and tedious.
+
+Let's refactor this code by reading a blueprint for what a house should look like.
+
+Let's make a function that when used we'll construct a house object in javascript.
+
+We call the special functions constructor functions. */
 
 // set up constructor function
 function House(bedrooms, bathrooms, numSqft) {
@@ -214,7 +248,31 @@ Third it adds an implicit return.
 This at the end of the function so that the object created using the new keyword can be returned from
 the function.
 
-Fourth it adds the Dunder Prato property onto the object that was just created. */
+Fourth it adds the Dunder Proto property onto the object that was just created. */
+
+
+/* Multiple Constructor Functions 
+Now let's imagine that we have two constructor functions one for a car and one for a flyrod.
+
+Here's the code for both of them and what we see here is nothing special just some functions that construct objects using the new keyword.
+
+But what's not great about this code.
+
+Look how much code we're duplicating in the motorcycle function.
+
+It would be really neat if we could somehow borrow the code from the card function and put it in the flyrod function. */
+
+/* you might be thinking why don't we just call the car function inside of the motorcycle function.
+The problem here is when we call the car function the key word this refers to the object that will be
+created from the car function.
+But that's the wrong thing.
+What we need to do here is change the value of the keyword this to be the object created from the motor
+cycle function.
+So how can we change the value of the keyword this
+This we go back to our third rule of figuring out the value of the keyword this with explicit binding
+.
+This means we want to use call apply or bind. we can dismiss using bind because we don't want to return
+a function definition so let's choose call or apply. */
 
 // Using Call
 function Car(make, model, year) {
@@ -232,8 +290,26 @@ function flyRod(make, model, year) {
 var tesla = new Car("Tesla", "Model 3", "2018");
 var spey = new flyRod("G Loomis", "Asquith", "2020");
 
-tesla.make;
-spey.make;
+tesla.make; // Tesla
+spey.make; // G Loomis
+
+/* Recap
+We want to remove duplication from our motorcycle function.
+So what we're doing is borrowing the code from the car function by calling it inside of the motor cycle
+function.
+The problem here is that the keyword this inside of the car function is not the keyword this that we
+want to use.
+So we need to change the value of the keyword this.
+To do that we use CALL or  APPLY. */
+
+/* So we need to change the value of the keyword this. To do that we use CALL or  APPLY.
+And as the first parameter to CALL or APPLY we specify what we would like the value of the keyword this
+to be.
+The keyword this to be is the object that will be created from the motorcycle function.
+The way that we get access to that object is by using the keyword this inside of the motorcycle function
+.
+That's why the first argument to call or apply is the keyword this which refers to the object created
+from the motorcycle function when the new keyword this is used */
 
 // Using Apply
 function Car(make, model, year) {
@@ -251,8 +327,10 @@ function flyRod(make, model, year) {
 var tesla = new Car("Tesla", "Model 3", "2018");
 var spey = new flyRod("G Loomis", "Asquith", "2020");
 
-tesla.make;
-spey.make;
+tesla.make;  // Tesla
+spey.make;  // G Loomis
+
+
 
 // Using Apply with arguments
 function Car(make, model, year) {
@@ -270,5 +348,5 @@ function flyRod(make, model, year) {
 var tesla = new Car("Tesla", "Model 3", "2018");
 var spey = new flyRod("G Loomis", "Asquith", "2020");
 
-tesla.make;
-spey.make;
+tesla.make;  // Tesla
+spey.make;  // G Loomis 
