@@ -362,3 +362,40 @@ It sets the value of the keyword this to be that object created in�
 previous step 
 it adds 'return this' to the constructor function.
 And finally it sets a property on the object which we can access called Dunder Proto. */
+
+
+/* OOP Prototypes
+
+A circle is a function and a square is an object.
+
+So here we have a person constructor function which has a property called prototype which is an object
+
+that object has a property on it called constructor which points back to the original constructor function
+
+
+If properties or methods are placed on the person prototype they can be accessible from any object created from that constructor function
+
+The way in which these objects (which are created by the constructor function)
+get access to the prototype object is through the dunder Proto link.
+
+This link gets established when the new keyword is used. */
+
+/* To recap every constructor function has a property on it called prototype.
+
+The prototype property is an object which can also have methods and properties attached to it.
+
+These methods and properties are shared and accessible by any object that is created from that constructor function, When the new keyword is used. */
+
+// this is the constructor function
+function Person(name){
+  this.name = name;
+}
+
+// this is the object created from the person constructor
+var kelli = new Person("Kelli");
+var sam = new Person("Sammy");
+/* since we used the new keyword, we have established a link between the object
+and the prototype property. we can access by using __proto__ */
+
+kelli.__proto__ === Person.prototype // true
+sam.__proto__ === Person.prototype // true
