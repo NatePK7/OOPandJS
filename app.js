@@ -458,3 +458,10 @@ arr  // [7]      // called the array
 
 console.dir(arr) // consoled the directory of the array
 
+arr.__proto__ === Array.prototype // true
+
+/* The way that javascript finds methods and properties is by looking at the object and if it can't find the method or property you're looking for it goes to that objects __proto__
+
+This actually keeps happening until the property or method is found.
+
+And if it is not found the expression evaluates to undefined */
