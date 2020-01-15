@@ -399,3 +399,62 @@ and the prototype property. we can access by using __proto__ */
 
 kelli.__proto__ === Person.prototype // true
 sam.__proto__ === Person.prototype // true
+
+
+/* Prototype Chain 
+
+when the new keyword is used.  A property is added to the
+
+object created from the constructor function called dunder proto.
+
+This property links to the prototype property on the constructor function.
+
+But what value does this prototype property have? 
+The prototype property is an object which can have methods and properties placed on it.
+
+These methods and properties are shared and accessible by any object that is created from that constructor function when the new keyword is used . */
+
+
+
+/* When the new keyword is used in this example where adding a property on the prototype called is instructor and setting the value to be true.
+ */
+function Person(name){  // this is the constructor function
+  this.name = name;
+}
+
+var kelli = new Person('Kelli');
+var sam = new Person('Samantha');
+
+Person.prototype.isInstructor = true;
+
+kelli.isInstructor; // true
+sam.isInstructor; // true 
+
+
+
+/* Now all of our objects that have been created from this constructor using the new keyword have access to the is instructor property.
+
+But how in the world did that happen?
+
+We added a property on the Person.prototype object and all of a sudden two seemingly non-related objects have access to it.
+
+The answer lies in dunder proto.
+
+Since these objects have a link to Person.prototype they can access anything inside of it.
+
+In fact this is actually the exact way that javascript finds methods and properties on objects.
+
+And what we've just described is something called the prototype chain. */
+
+
+// Prototype Chain 
+var arr = [];      // created a array variable
+
+new Array // []   // created new empty array
+
+arr.push(7)  // 1  //added to array one number
+
+arr  // [7]      // called the array
+
+console.dir(arr) // consoled the directory of the array
+
