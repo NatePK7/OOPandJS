@@ -198,8 +198,8 @@ function Dog(name, age, color) {
 var rusty = new Dog("Rusty", 3, "red");
 var fido = new Dog("Fido", 1, "white");
 
-rusty.bark();
-fido.bark();
+rusty.bark();  //Rusty the red dog just barked!
+fido.bark();  // Fido the white dog just barked!
 
 /* Imagine for a second that you're an architect and you're tasked with building 4 houses.
 
@@ -360,5 +360,5 @@ We also saw that the new keyword does four things 
 creates an object out of thin air
 It sets the value of the keyword this to be that object created in the 
 previous step 
-it adds return this to the constructor function.
+it adds 'return this' to the constructor function.
 And finally it sets a property on the object which we can access called Dunder Proto. */
