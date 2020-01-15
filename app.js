@@ -114,7 +114,6 @@ girl.cat.determineContext.call(girl); // true
 /* we are not invoking sayHello or determineContext methods but instead 
 attaching call onto them so there are no parentheses after sayHello or determineContext methods */
 
-
 // Using Call in the Wild common use case
 
 var meow = {
@@ -150,7 +149,6 @@ var smelly = {
 meow.sayHi(); // meowy mow hobie
 meow.sayHi.call(smelly); //meowy meow sophie  using the meow object's function and calling smelly object. Explicitly set to the smelly object
 
-
 /* Bind is partial application 
 Works just like call but Bind returns a function definition set to the value of this.arg
 Don't need to know all the parameters of the function when bind we only need to know what the value of the key word
@@ -176,7 +174,6 @@ brianCalc(); // Brian just calculated 10
 var brianCalc2 = sam.addNumbers.bind(brian, 1, 2);
 brianCalc2(3, 4); // Brian just calculated 10
 
-
 /* Rule 4 New:  Keyword this  with the new keyword, the this applies to the new empty object. */
 
 /* OOP (Object Oriented Programming)
@@ -184,9 +181,6 @@ Programming model based around the idea of objects
 and blue prints which create objects. Blue prints are called classes
 the objects that are created from these classes are called instances 
 Java Script does not have built in classes- we can mimic the behavior of classes by using JavaScript functions and objects*/
-
-
-
 
 /* create a constructor function for a Dog - each dog should have a name 
 and an age. Add a function for each dog called 'bark,' which console.log
@@ -206,7 +200,6 @@ var fido = new Dog("Fido", 1, "white");
 
 rusty.bark();
 fido.bark();
-
 
 /* Imagine for a second that you're an architect and you're tasked with building 4 houses.
 
@@ -249,7 +242,6 @@ This at the end of the function so that the object created using the new keyword
 the function.
 
 Fourth it adds the Dunder Proto property onto the object that was just created. */
-
 
 /* Multiple Constructor Functions 
 Now let's imagine that we have two constructor functions one for a car and one for a flyrod.
@@ -327,10 +319,8 @@ function flyRod(make, model, year) {
 var tesla = new Car("Tesla", "Model 3", "2018");
 var spey = new flyRod("G Loomis", "Asquith", "2020");
 
-tesla.make;  // Tesla
-spey.make;  // G Loomis
-
-
+tesla.make; // Tesla
+spey.make; // G Loomis
 
 /* Using Apply with arguments
 
@@ -353,5 +343,22 @@ function flyRod(make, model, year) {
 var tesla = new Car("Tesla", "Model 3", "2018");
 var spey = new flyRod("G Loomis", "Asquith", "2020");
 
-tesla.make;  // Tesla
-spey.make;  // G Loomis 
+tesla.make; // Tesla
+spey.make; // G Loomis
+
+/* 
+Object Oriented Programming Recap
+
+We learned that object oriented programming is a model based on objects which are constructed from some kind of blueprint.
+In languages that had built in support for OOP, we call these blueprints 
+classes and the objects created from them instances 
+Since we do not have built in class support in JavaScript,
+We mimic the functionality of classes by using functions to create objects 
+through the use of constructor functions and the new keyword
+
+We also saw that the new keyword does four things 
+creates an object out of thin air
+It sets the value of the keyword this to be that object created in the 
+previous step 
+it adds return this to the constructor function.
+And finally it sets a property on the object which we can access called Dunder Proto. */
