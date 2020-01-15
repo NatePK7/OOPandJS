@@ -332,7 +332,12 @@ spey.make;  // G Loomis
 
 
 
-// Using Apply with arguments
+/* Using Apply with arguments
+
+Using apply with arguments was able to reduce code 
+Instead of listing make, model and year in the Car.apply in the motorcycle function
+Was able to refactor to this, arguments */
+
 function Car(make, model, year) {
   this.make = make;
   this.model = model;
