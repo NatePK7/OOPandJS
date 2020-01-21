@@ -191,15 +191,15 @@ function Dog(name, age, color) {
   this.age = age;
   this.color = color;
   this.bark = function() {
-    console.log(this.name + " the " + this.color + " dog" + " just barked!");
+    console.log(this.name + " the " + this.age + " year old " + this.color + " dog" + " just barked!");
   };
 }
 
 var rusty = new Dog("Rusty", 3, "red");
 var fido = new Dog("Fido", 1, "white");
 
-rusty.bark(); //Rusty the red dog just barked!
-fido.bark(); // Fido the white dog just barked!
+rusty.bark(); //Rusty the 3 year old  red dog just barked!
+fido.bark(); // Fido the 1 year old white dog just barked!
 
 /* Imagine for a second that you're an architect and you're tasked with building 4 houses.
 
