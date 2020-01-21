@@ -73,7 +73,7 @@ var girl = {
       return "Hello " + this.firstName; //keyword this refers to the cat object
     },
     determineContext: function() {
-      return this === person;
+      return this === girl;
     }
   }
 };
@@ -198,8 +198,8 @@ function Dog(name, age, color) {
 var rusty = new Dog("Rusty", 3, "red");
 var fido = new Dog("Fido", 1, "white");
 
-rusty.bark();  //Rusty the red dog just barked!
-fido.bark();  // Fido the white dog just barked!
+rusty.bark(); //Rusty the red dog just barked!
+fido.bark(); // Fido the white dog just barked!
 
 /* Imagine for a second that you're an architect and you're tasked with building 4 houses.
 
@@ -363,7 +363,6 @@ previous step 
 it adds 'return this' to the constructor function.
 And finally it sets a property on the object which we can access called Dunder Proto. */
 
-
 /* OOP Prototypes
 
 A circle is a function and a square is an object.
@@ -387,7 +386,7 @@ The prototype property is an object which can also have methods and properties a
 These methods and properties are shared and accessible by any object that is created from that constructor function, When the new keyword is used. */
 
 // this is the constructor function
-function Person(name){
+function Person(name) {
   this.name = name;
 }
 
@@ -397,9 +396,8 @@ var sam = new Person("Sammy");
 /* since we used the new keyword, we have established a link between the object
 and the prototype property. we can access by using __proto__ */
 
-kelli.__proto__ === Person.prototype // true
-sam.__proto__ === Person.prototype // true
-
+kelli.__proto__ === Person.prototype; // true
+sam.__proto__ === Person.prototype; // true
 
 /* Prototype Chain 
 
@@ -414,23 +412,20 @@ The prototype property is an object which can have methods and properties placed
 
 These methods and properties are shared and accessible by any object that is created from that constructor function when the new keyword is used . */
 
-
-
 /* When the new keyword is used in this example where adding a property on the prototype called is instructor and setting the value to be true.
  */
-function Person(name){  // this is the constructor function
+function Person(name) {
+  // this is the constructor function
   this.name = name;
 }
 
-var kelli = new Person('Kelli');
-var sam = new Person('Samantha');
+var kelli = new Person("Kelli");
+var sam = new Person("Samantha");
 
 Person.prototype.isInstructor = true;
 
 kelli.isInstructor; // true
-sam.isInstructor; // true 
-
-
+sam.isInstructor; // true
 
 /* Now all of our objects that have been created from this constructor using the new keyword have access to the is instructor property.
 
@@ -446,22 +441,93 @@ In fact this is actually the exact way that javascript finds methods and propert
 
 And what we've just described is something called the prototype chain. */
 
+// Prototype Chain
+var arr = []; // created a array variable
 
-// Prototype Chain 
-var arr = [];      // created a array variable
+new Array(); // []   // created new empty array
+arr.push(7); // 1  //added to array one number
+arr; // [7]      // called the array
+console.dir(arr); // consoled the directory of the array
 
-new Array // []   // created new empty array
-
-arr.push(7)  // 1  //added to array one number
-
-arr  // [7]      // called the array
-
-console.dir(arr) // consoled the directory of the array
-
-arr.__proto__ === Array.prototype // true
+arr.__proto__ === Array.prototype; // true
 
 /* The way that javascript finds methods and properties is by looking at the object and if it can't find the method or property you're looking for it goes to that objects __proto__
 
 This actually keeps happening until the property or method is found.
 
 And if it is not found the expression evaluates to undefined */
+
+// Prototype Chain Exercise Refactor
+
+function Player(name) {
+  this.name = name;
+  this.sayHi = function() {
+    return "Hi " + this.name;
+  };
+}
+
+kelli = new Player("Kelli");
+kelli.sayHi(); // Hi Kelli
+lynch = new Player("Beast Mode");
+lynch.sayHi(); // Hi Beast Mode
+// this code works but it is inefficient
+// every time we make an object using the new keyword we have to redefine this function
+// but its the same for everyone so let's put it on the prototype instead
+
+// Refactored
+function Person(name) {
+  this.name = name;
+}
+
+Person.prototype.sayHi = function() {
+  return "Hi " + this.name;
+};
+
+kelli = new Person("Kelli");
+kelli.sayHi(); // Hi Kelli
+
+kim = new Person("Kimmy D");
+kim.sayHi(); // Hi Kimmy D
+
+/* Create a constructor function for a vehicle.
+
+Every object created from this constructor function should have a make model and year property 
+
+each object should also have a property called is running which should be equal to false.
+
+Every object created from the vehicle constructor should have a function called Turn on which changes the is running property for that object to true 
+
+every object created from a local constructor should also have a function called Turn off which changes the is running property to False.
+
+Finally every object created from the vehicle constructor should have a method called honk which returns the string beep only if the is running property on that object is true. */
+
+function Vehicle(make, model, year) {
+  this.make = make;
+  this.model = model;
+  this.year = year;
+  this.isRunning = false;
+}
+
+Vehicle.prototype.turnOn = function() {
+  this.isRunning = true;
+};
+
+Vehicle.prototype.turnOff = function() {
+  this.isRunning = false;
+};
+
+Vehicle.prototype.honk = function() {
+  if (this.isRunning) {
+    return "beep";
+  }
+};
+
+var tesla = new Vehicle("Tesla", "Model 3", "2018");
+tesla.make; // Tesla
+tesla.isRunning; // false
+tesla.turnOn; // this.isRunning = true
+tesla.honk; // returns the honk function above
+
+var bmw = new Vehicle("BMW", "M235i", "2014");
+bmw.model; // M235i
+bmw.honk; // returns the honk function above
