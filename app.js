@@ -80,6 +80,12 @@ forEach(arr, function(number) {
   console.log(number * 2);
 });
 
+var arr = [1,2,3,4,5];
+function forEach(arr, callback) [
+  for (var i = 0; i < arr.length; i++) {
+    callback(arr[i], i, arr);
+  }
+}
 
 
 // console.clear() to clear the console
