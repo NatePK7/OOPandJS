@@ -1,3 +1,90 @@
+// Advanced Web Dev Bootcamp
+
+// Call Back functions - fn that is passed into another fn as a parameter then invoked by that other fn
+
+function spey() {
+  console.log("likes to eat steelhead");
+}
+
+function bestboy(fn) {
+  console.log("Hobie the best boy");
+  fn(); // callback spey function is invoked
+  console.log("for dinners");
+}
+bestboy(spey);
+
+// Higher order fxn is a fxn that accepts a callback as a parameter
+/*
+function sendMessageConsole(message) {
+  console.log(message);
+}
+
+function sendMessageAlert(message) {
+  alert(message);
+}
+
+function sendMessageConfirm(message) {
+  return confirm(message);
+}
+
+sendMessageAlert("Lots of duplication");
+
+// refactored
+
+/*N function sendMessage(message, callback) {
+  return callback(message);
+}
+
+
+sendMessage("Message for console", console.log);
+
+sendMessage("Message for alert", alert);
+
+var answer = sendMessage("Are you sure??, confirm");
+*/
+
+//callbacks with function declarations
+
+function greet(name, formatter) {
+  return "Hello, " + formatter(name);
+}
+
+function upperCaseName(name) {
+  return name.toUpperCase();
+}
+
+greet("Hobie", upperCaseName);
+
+//anonymous function
+
+function greet(name, formatter) {
+  return "Hello ",  + formatter(name);
+}
+greet("Hobie ", function(name){
+  return name.toUpperCase();
+});
+
+// For Each
+var arr = [1,2,3,4,5];
+function double(arr) {
+  for(var i = 0; i < arr.length; i++) {
+    console.log(arr[i] * 2);
+  }
+}
+double(arr);
+
+// contrast with
+
+var arr = [1,2,3,4,5];
+forEach(arr, function(number) {
+  console.log(number * 2);
+});
+
+
+
+// console.clear() to clear the console
+
+
 /* Start of Tricky Java Script
  
 	Rule 1 Global:  if the keyword this is outside of a declared object, its value is the global or window object
@@ -61,21 +148,21 @@ Nested Objects */
 
 var girl = {
   firstName: "Kimmy D",
-  sayHi: function() {
+  sayHi: function () {
     return "Hi " + this.firstName;
   },
-  determineContext: function() {
+  determineContext: function () {
     return this === girl;
   },
 
   cat: {
-    sayHello: function() {
+    sayHello: function () {
       return "Hello " + this.firstName; //keyword this refers to the cat object
     },
-    determineContext: function() {
+    determineContext: function () {
       return this === girl;
-    }
-  }
+    },
+  },
 };
 
 girl.determineContext(); // true
@@ -88,21 +175,21 @@ girl.cat.sayHello(); // hello undefined because the cat object does not have a k
 // Fix Up with Call
 var girl = {
   firstName: "Kimmy D",
-  sayHi: function() {
+  sayHi: function () {
     return "Hi " + this.firstName;
   },
-  determineContext: function() {
+  determineContext: function () {
     return this === girl;
   },
 
   cat: {
-    sayHello: function() {
+    sayHello: function () {
       return "Hello " + this.firstName;
     },
-    determineContext: function() {
+    determineContext: function () {
       return this === girl;
-    }
-  }
+    },
+  },
 };
 
 girl.sayHi(); // Hi Kimmy D
@@ -118,16 +205,16 @@ attaching call onto them so there are no parentheses after sayHello or determine
 
 var meow = {
   firstName: "Hobie",
-  sayHi: function() {
+  sayHi: function () {
     return "Meowy Meow " + this.firstName;
-  }
+  },
 };
 
 var smelly = {
   firstName: "Sophie",
-  sayHi: function() {
+  sayHi: function () {
     return "Meowy Meow " + this.firstName;
-  }
+  },
 };
 
 meow.sayHi(); // Meowy Meow Hobie
@@ -137,13 +224,13 @@ smelly.sayHi(); // Meowy Meow Sophie
 
 var meow = {
   firstName: "Hobie",
-  sayHi: function() {
+  sayHi: function () {
     return "Meowy Meow " + this.firstName;
-  }
+  },
 };
 
 var smelly = {
-  firstName: "Sophie"
+  firstName: "Sophie",
 };
 
 meow.sayHi(); // meowy mow hobie
@@ -156,16 +243,16 @@ this to be  */
 
 var sam = {
   firstName: "Sam",
-  sayHi: function() {
+  sayHi: function () {
     return "Hi " + this.firstName;
   },
-  addNumbers: function(a, b, c, d) {
+  addNumbers: function (a, b, c, d) {
     return this.firstName + " just calculated " + (a + b + c + d);
-  }
+  },
 };
 
 var brian = {
-  firstName: "Brian"
+  firstName: "Brian",
 };
 
 var brianCalc = sam.addNumbers.bind(brian, 1, 2, 3, 4);
@@ -190,8 +277,16 @@ function Dog(name, age, color) {
   this.name = name;
   this.age = age;
   this.color = color;
-  this.bark = function() {
-    console.log(this.name + " the " + this.age + " year old " + this.color + " dog" + " just barked!");
+  this.bark = function () {
+    console.log(
+      this.name +
+        " the " +
+        this.age +
+        " year old " +
+        this.color +
+        " dog" +
+        " just barked!"
+    );
   };
 }
 
@@ -461,7 +556,7 @@ And if it is not found the expression evaluates to undefined */
 
 function Player(name) {
   this.name = name;
-  this.sayHi = function() {
+  this.sayHi = function () {
     return "Hi " + this.name;
   };
 }
@@ -479,7 +574,7 @@ function Person(name) {
   this.name = name;
 }
 
-Person.prototype.sayHi = function() {
+Person.prototype.sayHi = function () {
   return "Hi " + this.name;
 };
 
@@ -508,15 +603,15 @@ function Vehicle(make, model, year) {
   this.isRunning = false;
 }
 
-Vehicle.prototype.turnOn = function() {
+Vehicle.prototype.turnOn = function () {
   this.isRunning = true;
 };
 
-Vehicle.prototype.turnOff = function() {
+Vehicle.prototype.turnOff = function () {
   this.isRunning = false;
 };
 
-Vehicle.prototype.honk = function() {
+Vehicle.prototype.honk = function () {
   if (this.isRunning) {
     return "beep";
   }
