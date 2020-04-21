@@ -3,16 +3,16 @@
 
 // Call Back functions - fn that is passed into another fn as a parameter then invoked by that other fn
 
-function spey() {
-  console.log("likes to eat steelhead");
+function callback() {
+  console.log("coming from callback");
 }
 
-function bestboy(fn) {
-  console.log("Hobie the best boy");
+function higherOrder(fn) {
+  console.log("about to call callback");
   fn(); // callback spey function is invoked
-  console.log("for dinners");
+  console.log("callback has been invoked");
 }
-bestboy(spey);
+higherOrder(callback);
 
 
 
