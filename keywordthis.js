@@ -66,8 +66,10 @@ Nested Objects */
 
 var girl = {
   firstName: "Kimmy D",
+  middleName: "is",
+  lastName: "Awesome Sexy",
   sayHi: function () {
-    return "Hi " + this.firstName;
+    return ("Hi " + this.firstName + " " +  this.middleName + ' ' + this.lastName);
   },
   determineContext: function () {
     return this === girl;
@@ -87,6 +89,18 @@ girl.determineContext(); // true
 girl.sayHi(); // Hi Kimmy D
 girl.cat.determineContext(); // false
 girl.cat.sayHello(); // hello undefined because the cat object does not have a key of first name
+
+// check progress
+// what should the keyword this refer to here
+
+var person = {
+  firstName: 'Kim',
+  determineContext: this;
+}
+
+person.determineContext; // window
+
+
 
 /* if we wanted to call  the sayHello method to return Hello Kimmy D instead of Hello Undefined?  We would need a way to explicitly change the value of the keyword this and that's where call, apply and bind come in */
 
