@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <title>Tricky JS</title>
+</head>
+<body>
+
+
+<div class="container">
+  <div class="jumbotron">
+  <h1 class="display-4">Java Script Key word "this"</h1>
+    <p class="lead">Rule 1 Global:  if the keyword this is outside of a declared object, its value is the global or window (browser) object  </p>
+  <hr class="my-4">
+    <p>Rule 2 object/ implicit: Keyword this inside of a declared object value is the closest parent object</p>
+  <hr class="my-4">
+    <p>Rule 3 explicit using call, apply and bind only applies to functions:  to explicitly set the value of Keyword this , we use call apply or bind.  with the bind keyword, the first argument called is this</p>
+  <hr class="my-4">
+    <p> Rule 4 New:  Keyword this  with the new keyword, the this applies to the new empty object.</p>
+  <a class="btn btn-primary btn-lg" href="https://www.udemy.com/course/the-web-developer-bootcamp/learn/lecture/5697562#questions" role="button">Learn more at Web Developer Bootcamp</a>
+</div>
+</div>
+
+<div class="container">
+  <div class="jumbotron">
+  <h1 class="display-4">Java Script Key word "new"</h1>
+    <p class="lead">First it creates an empty object out of thin air.</p>
+    <p>Second it then sets the value of the keyword..</p>
+    <p>Third it adds an implicit return.</p>
+    <p> Fourth it adds the dunder Proto property onto the object that was just created.</p>
+  <a class="btn btn-primary btn-lg" href="https://www.udemy.com/course/the-web-developer-bootcamp/learn/lecture/5697562#questions" role="button">Learn more at Web Developer Bootcamp</a>
+</div>
+</div>
+ 
+
+  <script src="app.js"></script>
+</body>
+</html>
